@@ -1,0 +1,7 @@
+cat >> .gitignore << 'EOF'
+.idea/
+__pycache__/
+*.pyc
+*.db
+dist/
+EOF

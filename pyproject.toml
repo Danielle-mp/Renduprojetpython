@@ -1,0 +1,22 @@
+[project]
+name = "student-manager"
+version = "2.5.1"
+description = "Application de bureau (Tkinter et SQLite) pour gérer les étudiants, les matières et les notes, avec des rapports statistiques."
+authors = [
+    {name = "Danielle Maneche", email = "danielle.maneche@efrei.net"},
+    {name = "Divine Omaty", email = "divine.omaty@efrei.net"},
+]
+readme = "README.md"
+requires-python = ">=3.14"
+dependencies = ["pandas (>=3.1.0,<4.0.0)", "numpy (>=2.5.4,<3.0.0)"]
+
+[tool.poetry]
+packages = [{include = "student_manager", from = "src"}]
+
+[build-system]
+requires = ["poetry-core>=2.0.0,<3.0.0"]
+build-backend = "poetry.core.masonry.api"
+[dependency-groups]
+dev = [
+    "pytest (>=9.2.0,<10.0.0)"
+]
