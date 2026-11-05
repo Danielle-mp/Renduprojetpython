@@ -3,18 +3,29 @@ from .database import get_connection
 
 def add_grade(student_id, subject_id, grade):
     """
-    À compléter : Ajoute une note pour un étudiant et une matière.
+    Ajoute une note pour un étudiant et une matière.
+    Retourne l'identifiant de la note créée.
     """
 
-    pass
+    with get_connection() as connection:
+        cursor = connection.execute(
+            (student_id, subject_id, grade)
+        )
+
+        return cursor.lastrowid
 
 
 def get_grades_by_student(student_id):
     """
-    À compléter : Retourne les notes d'un étudiant avec le nom de la matière.
+    Retourne les notes d'un étudiant avec le nom de la matière,
     """
 
-    pass
+    with get_connection() as connection:
+        cursor = connection.execute(
+            (student_id,)
+        )
+
+        return cursor.fetchall()
 
 
 def get_student_average(student_id):

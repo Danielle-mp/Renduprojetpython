@@ -48,16 +48,48 @@ def test_add_student(setup_database):
 
 
 def test_get_students(setup_database):
-    # À compléter :  vérifier la récupération de la liste des étudiants.
+    """Vérifie la récupération de la liste des étudiants."""
+
+    add_student("Alice", "Martin", "alice@example.com", "BTS SIO")
+    add_student("Bob", "Durand", "bob@example.com", "BTS SIO")
+
+    students = get_students()
+
+    assert students == [
+        (2, "Bob", "Durand", "bob@example.com", "BTS SIO"),
+        (1, "Alice", "Martin", "alice@example.com", "BTS SIO"),
+    ]
 
 
 def test_delete_student(setup_database):
-    # À compléter : vérifier la suppression d’un étudiant.
+    """Vérifie la suppression d'un étudiant."""
+    alice_id = add_student("Alice", "Martin", "alice@example.com", "BTS SIO")
+    add_student("Bob", "Durand", "bob@example.com", "BTS SIO")
+
+    delete_student(alice_id)
+
+    students = get_students()
+    assert len(students) == 1
+    assert students[0][2] == "Durand"
 
 
 def test_search_students(setup_database):
-    # À compléter : vérifier la recherche d’étudiants à partir d’un nom ou d'un prénom.
+    """Vérifie la recherche par nom et par prénom."""
+    add_student("Alice", "Martin", "alice@example.com", "BTS SIO")
+    add_student("Bob", "Durand", "bob@example.com", "BTS SIO")
+    expected = [(1, "Alice", "Martin", "alice@example.com", "BTS SIO")]
+
+    by_last_name = search_students("Martin")
+    by_first_name = search_students("Alice")
+
+    assert by_last_name == expected
+    assert by_first_name == expected
 
 
 def test_search_students_no_result(setup_database):
-    # À compléter : vérifier le comportement de la recherche lorsqu’aucun étudiant ne correspond au critère indiqué.
+    """Vérifie qu'une recherche sans correspondance renvoie une liste vide."""
+    add_student("Alice", "Martin", "alice@example.com", "BTS SIO")
+
+    results = search_students("Inconnu")
+
+    assert results == []
