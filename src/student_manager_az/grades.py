@@ -5,7 +5,6 @@ def add_grade(student_id, subject_id, grade):
     """
     Ajoute une note pour un étudiant et une matière.
     Retourne l'identifiant de la note créée.
-    Retourne les notes d'un étudiant avec le nom de la matière,
     """
 
     with get_connection() as connection:

@@ -3,10 +3,18 @@ from .database import get_connection
 
 def get_student_count():
     """
-    À compléter : Retourne le nombre total d'étudiants.
+    Retourne le nombre total d'étudiants.
     """
 
-    pass
+    with get_connection() as connection:
+        cursor = connection.execute(
+            """
+            SELECT COUNT(*)
+            FROM students
+            """
+        )
+
+        return cursor.fetchone()[0]
 
 
 def get_general_average():
