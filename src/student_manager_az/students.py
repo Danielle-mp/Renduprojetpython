@@ -26,6 +26,10 @@ def add_student(first_name, last_name, email, class_name):
 
     with get_connection() as connection:
         cursor = connection.execute(
+            """
+            INSERT INTO students (first_name, last_name, email, class_name)
+            VALUES (?, ?, ?, ?)
+            """,
             (first_name, last_name, email, class_name)
         )
 
