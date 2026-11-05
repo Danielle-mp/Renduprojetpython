@@ -20,23 +20,39 @@ def get_students():
 
 def add_student(first_name, last_name, email, class_name):
     """
-    À compléter : Ajoute un nouvel étudiant dans la base de données.
+    Ajoute un nouvel étudiant dans la base de données.
+    Retourne l'identifiant du nouvel étudiant.
     """
 
-    pass
+    with get_connection() as connection:
+        cursor = connection.execute(
+            (first_name, last_name, email, class_name)
+        )
+
+        return cursor.lastrowid
 
 
 def delete_student(student_id):
     """
-    À compléter : Supprime un étudiant.
+    Supprime un étudiant.
     """
 
-    pass
+    with get_connection() as connection:
+        connection.execute(
+            (student_id,)
+        )
 
 
 def search_students(name):
     """
-    À compléter : Recherche un étudiant par son nom ou son prénom.
+    Recherche un étudiant par son nom ou son prénom.
     """
 
-    pass
+    pattern = f"%{name}%"
+
+    with get_connection() as connection:
+        cursor = connection.execute(
+            (pattern, pattern)
+        )
+
+        return cursor.fetchall()
