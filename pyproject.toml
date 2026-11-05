@@ -1,6 +1,6 @@
 [project]
 name = "student-manager"
-version = "2.5.1"
+version = "2.5.2"
 description = "Application de bureau (Tkinter et SQLite) pour gérer les étudiants, les matières et les notes, avec des rapports statistiques."
 authors = [
     {name = "Danielle Maneche", email = "danielle.maneche@efrei.net"},
