@@ -31,7 +31,7 @@ def test_add_grade(setup_database):
     """Vérifie l'ajout d'une note."""
     student_id = setup_database
     add_grade(student_id, PYTHON_ID, 15)
-    assert get_grades_by_student(student_id) == [("Python", 15.0)]
+    assert get_grades_by_student(student_id) == [(1, "Python", 15.0)]
 
 
 def test_get_grades_by_student(setup_database):
@@ -44,7 +44,7 @@ def test_get_grades_by_student(setup_database):
 
     grades = get_grades_by_student(student_id)
 
-    assert grades == [("Python", 12.0), ("SQL", 15.0)]
+    assert grades == [(1, "Python", 12.0), (2, "SQL", 15.0)]
 
 
 def test_get_student_average(setup_database):

@@ -7,12 +7,7 @@ def get_student_count():
     """
 
     with get_connection() as connection:
-        cursor = connection.execute(
-            """
-            SELECT COUNT(*)
-            FROM students
-            """
-        )
+        cursor = connection.execute("SELECT COUNT(*) FROM students")
 
         return cursor.fetchone()[0]
 

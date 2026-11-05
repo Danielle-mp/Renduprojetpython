@@ -9,7 +9,9 @@ def add_grade(student_id, subject_id, grade):
 
     with get_connection() as connection:
         cursor = connection.execute(
-            (student_id, subject_id, grade)
+            "INSERT INTO grades (student_id, subject_id, grade) "
+            "VALUES (?, ?, ?)",
+            (student_id, subject_id, grade),
         )
 
         return cursor.lastrowid
@@ -18,11 +20,17 @@ def add_grade(student_id, subject_id, grade):
 def get_grades_by_student(student_id):
     """
     Retourne les notes d'un étudiant avec le nom de la matière,
+    sous la forme (id_note, nom_matiere, note).
     """
 
     with get_connection() as connection:
         cursor = connection.execute(
-            (student_id,)
+            "SELECT grades.id, subjects.name, grades.grade "
+            "FROM grades "
+            "JOIN subjects ON grades.subject_id = subjects.id "
+            "WHERE grades.student_id = ? "
+            "ORDER BY subjects.name",
+            (student_id,),
         )
 
         return cursor.fetchall()

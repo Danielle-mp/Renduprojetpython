@@ -8,10 +8,10 @@ authors = [
 ]
 readme = "README.md"
 requires-python = ">=3.14"
-dependencies = ["pandas (>=3.1.0,<4.0.0)", "numpy (>=2.5.4,<3.0.0)"]
+dependencies = []
 
 [tool.poetry]
-packages = [{include = "student_manager", from = "src"}]
+packages = [{include = "student_manager_az", from = "src"}]
 
 [build-system]
 requires = ["poetry-core>=2.0.0,<3.0.0"]

@@ -26,11 +26,9 @@ def add_student(first_name, last_name, email, class_name):
 
     with get_connection() as connection:
         cursor = connection.execute(
-            """
-            INSERT INTO students (first_name, last_name, email, class_name)
-            VALUES (?, ?, ?, ?)
-            """,
-            (first_name, last_name, email, class_name)
+            "INSERT INTO students (first_name, last_name, email, class_name) "
+            "VALUES (?, ?, ?, ?)",
+            (first_name, last_name, email, class_name),
         )
 
         return cursor.lastrowid
@@ -43,7 +41,8 @@ def delete_student(student_id):
 
     with get_connection() as connection:
         connection.execute(
-            (student_id,)
+            "DELETE FROM students WHERE id = ?",
+            (student_id,),
         )
 
 
@@ -56,7 +55,11 @@ def search_students(name):
 
     with get_connection() as connection:
         cursor = connection.execute(
-            (pattern, pattern)
+            "SELECT id, first_name, last_name, email, class_name "
+            "FROM students "
+            "WHERE first_name LIKE ? OR last_name LIKE ? "
+            "ORDER BY last_name, first_name",
+            (pattern, pattern),
         )
 
         return cursor.fetchall()
